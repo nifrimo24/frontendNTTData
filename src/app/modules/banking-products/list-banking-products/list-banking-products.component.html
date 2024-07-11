@@ -1,0 +1,23 @@
+<div class="product-panel">
+  <input type="text" placeholder="Buscar..." />
+  <button (click)="addProduct()">Agregar</button>
+  <table>
+    <tr>
+      <th>Nombre del producto</th>
+      <th>Descripción</th>
+      <th>Fecha de liberación</th>
+      <th>Fecha de reestructuración</th>
+      <th>Acciones</th>
+    </tr>
+    <tr *ngFor="let bankingProduct of bankingProducts">
+      <td>{{ bankingProduct.name }}</td>
+      <td>{{ bankingProduct.description }}</td>
+      <td>{{ bankingProduct.releaseDate }}</td>
+      <td>{{ bankingProduct.restructuringDate }}</td>
+      <td>
+        <button (click)="editProduct(bankingProduct)">Editar</button>
+        <button (click)="deleteProduct(bankingProduct)">Eliminar</button>
+      </td>
+    </tr>
+  </table>
+</div>
