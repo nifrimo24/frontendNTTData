@@ -5,11 +5,13 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListBankingProductsComponent } from './banking-products/list-banking-products/list-banking-products.component';
+import { FormBankingProductsComponent } from './banking-products/form-banking-products/form-banking-products.component';
 
 
 @NgModule({
   declarations: [
-    ListBankingProductsComponent
+    ListBankingProductsComponent,
+    FormBankingProductsComponent
   ],
   imports: [
     CommonModule,
