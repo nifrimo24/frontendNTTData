@@ -7,11 +7,17 @@ import {
 } from "./banking-products/delete-banking-products/delete-banking-products.component";
 
 const routes: Routes = [
-    { path: 'bp/products/list', component: ListBankingProductsComponent},
-    { path: 'bp/products/create', component: FormBankingProductsComponent},
-    { path: 'bp/products/update', component: FormBankingProductsComponent},
-    { path: 'bp/products/delete', component: DeleteBankingProductsComponent}
+  {
+    path: 'bp/products',
+    children: [
+      { path: 'list', component: ListBankingProductsComponent },
+      { path: 'create', component: FormBankingProductsComponent },
+      { path: 'update', component: FormBankingProductsComponent },
+      { path: 'delete', component: DeleteBankingProductsComponent }
+    ]
+  }
 ];
+
 
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
