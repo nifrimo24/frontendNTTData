@@ -32,5 +32,10 @@ export class BankigProductsService {
     return (await this.getResponse(this.http.post<BankingProductsResponse>(urlCreateBankingProduct, newBankingProduct)))[0].data;
   }
 
+  async DeleteBankingProduct(bankingProductId: string) : Promise<string> {
+    const urlDeleteBankingProduct = `${this.urlBankingProductsAPI}bp/products/${bankingProductId}`;
+    return (await this.getResponse(this.http.delete<BankingProductsResponse>(urlDeleteBankingProduct)))[0].message;
+  }
+
 
 }

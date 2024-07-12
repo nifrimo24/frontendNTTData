@@ -24,6 +24,8 @@ export class ListBankingProductsComponent implements OnInit {
   bankingProductsPerPage: number[] = [];
   bankingProductsPerPageEnabled: boolean = false;
   searchTerm: any;
+  selectedBankingProductToDelete: BankingProduct | null = null;
+  deletedBankingProductId: string = "";
 
   async getAllBankingProducts() : Promise<void> {
     this.bankingProducts = await this.bpService.GetAllBankingProducts();
@@ -67,6 +69,21 @@ export class ListBankingProductsComponent implements OnInit {
 
   editProduct(product: BankingProduct) { }
 
-  deleteProduct(product: BankingProduct) { }
+  deleteProduct(bankingProduct: BankingProduct): void {
+    this.selectedBankingProductToDelete = bankingProduct;
+  }
+
+  async confirmDelete(): Promise<void> {
+    if (this.selectedBankingProductToDelete)
+      this.deletedBankingProductId = await this.bpService.DeleteBankingProduct(this.selectedBankingProductToDelete.id);
+
+    console.log(`Deleted product: ${this.deletedBankingProductId}`);
+    this.selectedBankingProductToDelete = null;
+  }
+
+  cancelDelete(): void {
+    this.selectedBankingProductToDelete = null;
+  }
+
 
 }
