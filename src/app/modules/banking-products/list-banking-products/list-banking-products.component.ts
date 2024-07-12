@@ -77,6 +77,7 @@ export class ListBankingProductsComponent implements OnInit {
     if (this.selectedBankingProductToDelete)
       this.deletedBankingProductId = await this.bpService.DeleteBankingProduct(this.selectedBankingProductToDelete.id);
 
+    this.getAllBankingProducts();
     console.log(`Deleted product: ${this.deletedBankingProductId}`);
     this.selectedBankingProductToDelete = null;
   }
@@ -84,6 +85,4 @@ export class ListBankingProductsComponent implements OnInit {
   cancelDelete(): void {
     this.selectedBankingProductToDelete = null;
   }
-
-
 }
