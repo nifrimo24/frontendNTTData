@@ -23,6 +23,7 @@ export class ListBankingProductsComponent implements OnInit {
   selectedBankingProduct: number = 0;
   bankingProductsPerPage: number[] = [];
   bankingProductsPerPageEnabled: boolean = false;
+  searchTerm: any;
 
   async getAllBankingProducts() : Promise<void> {
     this.bankingProducts = await this.bpService.GetAllBankingProducts();
@@ -36,8 +37,8 @@ export class ListBankingProductsComponent implements OnInit {
   }
 
   filterProducts(event: any) {
-    const searchTerm = event.target.value.toLowerCase();
-    this.filteredBankingProducts = this.bankingProducts.filter(product => product.name.toLowerCase().includes(searchTerm));
+    this.searchTerm = event.target.value.toLowerCase();
+    this.filteredBankingProducts = this.bankingProducts.filter(product => product.name.toLowerCase().includes(this.searchTerm));
     this.totalBankingProducts = this.filteredBankingProducts.length;
 
     this.bankingProductsPerPageEnabled = this.totalBankingProducts >= 5 ? true : false;
@@ -48,12 +49,20 @@ export class ListBankingProductsComponent implements OnInit {
 
   calculateRegistersPerPage(totalRecord: number): void {
     const pages = Math.ceil(this.totalBankingProducts / 5);
+    this.bankingProductsPerPage = [];
 
     for(let i = 1; i <= pages; i++) {
       this.bankingProductsPerPage.push(i * 5);
     }
 
     this.selectedBankingProduct = this.bankingProductsPerPage[0];
+    this.filteredBankingProducts = this.filteredBankingProducts.slice(0, this.selectedBankingProduct);
+  }
+
+  onBankingProductChange() {
+    this.filteredBankingProducts = this.bankingProducts
+      .filter(product => product.name.toLowerCase().includes(this.searchTerm))
+      .slice(0, this.selectedBankingProduct);
   }
 
   addProduct() { }

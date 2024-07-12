@@ -25,7 +25,7 @@
 
   <div class="footer-panel">
     <span>Total de registros: {{ totalBankingProducts }}</span>
-    <select [(ngModel)]="selectedBankingProduct" [disabled]="!bankingProductsPerPageEnabled">
+    <select [(ngModel)]="selectedBankingProduct" [disabled]="!bankingProductsPerPageEnabled" (change)="onBankingProductChange()">
       <option *ngFor="let bankingProduct of bankingProductsPerPage" [value]="bankingProduct">{{ bankingProduct }}</option>
     </select>
 
