@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {BankingProduct} from "../../../models/BankingProduct";
-import {BankigProductsService} from "../../../services/bankig-products.service";
 import {DeleteBankingProductsComponent} from "../delete-banking-products/delete-banking-products.component";
+import {BankigProductsService} from "../../../services/bankig-products.service";
 
 @Component({
   selector: 'app-list-banking-products',
