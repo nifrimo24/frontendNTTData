@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {BankingProduct} from "../../../models/BankingProduct";
 import {BankigProductsService} from "../../../services/bankig-products.service";
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-form-banking-products',
   templateUrl: './form-banking-products.component.html',
@@ -18,7 +19,10 @@ export class FormBankingProductsComponent implements OnInit {
     fechaRevision: ['', [Validators.required]]
   });
 
-  constructor(private formBuilder: FormBuilder, private bpService: BankigProductsService) { }
+  constructor(private formBuilder: FormBuilder,
+              private bpService: BankigProductsService,
+              private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
@@ -38,6 +42,7 @@ export class FormBankingProductsComponent implements OnInit {
     console.log("bankingProductCreated", bankingProductCreated);
 
     this.clearInputs();
+    this.router.navigateByUrl('/bp/products/list');
   }
 
   clearInputs(): void {
