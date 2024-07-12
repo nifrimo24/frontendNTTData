@@ -65,8 +65,6 @@ export class ListBankingProductsComponent implements OnInit {
       .slice(0, this.selectedBankingProduct);
   }
 
-  addProduct() { }
-
   editProduct(product: BankingProduct) { }
 
   deleteProduct(product: BankingProduct) { }

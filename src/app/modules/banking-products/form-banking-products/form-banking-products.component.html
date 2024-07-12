@@ -1,1 +1,35 @@
-<p>form-banking-products works!</p>
+<div class="product-panel">
+  <div class="header-panel">
+    <h1>Formulario de Registro</h1>
+  </div>
+  <form [formGroup]="bankingProductForm">
+    <div class="form-row">
+      <div class="form-column">
+        <label for="id">ID</label>
+        <input formControlName="id" type="text" id="id" placeholder="ID nuevo wiki!">
+
+        <label for="descripcion">Descripción</label>
+        <textarea formControlName="descripcion" id="descripcion" required></textarea>
+
+        <label for="fechaLiberacion">Fecha Liberación</label>
+        <input formControlName="fechaLiberacion" type="date" id="fechaLiberacion" value="2023-02-22">
+      </div>
+
+      <div class="form-column">
+        <label for="nombre">Nombre</label>
+        <input formControlName="nombre" type="text" id="nombre">
+
+        <label for="logo">Logo</label>
+        <input formControlName="logo" type="file" id="logo">
+
+        <label for="fechaRevision">Fecha Revisión</label>
+        <input formControlName="fechaRevision" type="date" id="fechaRevision" value="2024-02-22">
+      </div>
+    </div>
+
+    <div class="button-row">
+      <button type="reset">Reiniciar</button>
+      <button type="submit" (click)="buildBankingProducts()">Enviar</button>
+    </div>
+  </form>
+</div>
