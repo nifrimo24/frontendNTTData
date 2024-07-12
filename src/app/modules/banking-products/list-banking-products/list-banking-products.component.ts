@@ -22,11 +22,14 @@ export class ListBankingProductsComponent implements OnInit {
   totalBankingProducts: number = 0;
   selectedBankingProduct: number = 0;
   bankingProductsPerPage: number[] = [];
+  bankingProductsPerPageEnabled: boolean = false;
 
   async getAllBankingProducts() : Promise<void> {
     this.bankingProducts = await this.bpService.GetAllBankingProducts();
     this.filteredBankingProducts = [...this.bankingProducts];
     this.totalBankingProducts = this.filteredBankingProducts.length;
+
+    this.bankingProductsPerPageEnabled = this.totalBankingProducts >= 5 ? true : false;
 
     if(this.totalBankingProducts >= 5)
       this.calculateRegistersPerPage(this.totalBankingProducts);
@@ -36,6 +39,8 @@ export class ListBankingProductsComponent implements OnInit {
     const searchTerm = event.target.value.toLowerCase();
     this.filteredBankingProducts = this.bankingProducts.filter(product => product.name.toLowerCase().includes(searchTerm));
     this.totalBankingProducts = this.filteredBankingProducts.length;
+
+    this.bankingProductsPerPageEnabled = this.totalBankingProducts >= 5 ? true : false;
 
     if(this.totalBankingProducts >= 5)
       this.calculateRegistersPerPage(this.totalBankingProducts);
