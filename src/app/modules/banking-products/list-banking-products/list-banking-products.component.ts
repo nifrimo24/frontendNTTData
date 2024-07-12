@@ -19,15 +19,36 @@ export class ListBankingProductsComponent implements OnInit {
 
   bankingProducts: BankingProduct[] = [];
   filteredBankingProducts: BankingProduct[] = [];
+  totalBankingProducts: number = 0;
+  selectedBankingProduct: number = 0;
+  bankingProductsPerPage: number[] = [];
 
   async getAllBankingProducts() : Promise<void> {
     this.bankingProducts = await this.bpService.GetAllBankingProducts();
     this.filteredBankingProducts = [...this.bankingProducts];
+    this.totalBankingProducts = this.filteredBankingProducts.length;
+
+    if(this.totalBankingProducts >= 5)
+      this.calculateRegistersPerPage(this.totalBankingProducts);
   }
 
   filterProducts(event: any) {
     const searchTerm = event.target.value.toLowerCase();
     this.filteredBankingProducts = this.bankingProducts.filter(product => product.name.toLowerCase().includes(searchTerm));
+    this.totalBankingProducts = this.filteredBankingProducts.length;
+
+    if(this.totalBankingProducts >= 5)
+      this.calculateRegistersPerPage(this.totalBankingProducts);
+  }
+
+  calculateRegistersPerPage(totalRecord: number): void {
+    const pages = Math.ceil(this.totalBankingProducts / 5);
+
+    for(let i = 1; i <= pages; i++) {
+      this.bankingProductsPerPage.push(i * 5);
+    }
+
+    this.selectedBankingProduct = this.bankingProductsPerPage[0];
   }
 
   addProduct() { }

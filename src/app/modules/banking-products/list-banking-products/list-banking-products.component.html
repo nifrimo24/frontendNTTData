@@ -1,6 +1,8 @@
 <div class="product-panel">
-  <input type="text" placeholder="Buscar..." (input)="filterProducts($event)"/>
-  <button (click)="addProduct()">Agregar</button>
+  <div class="header-panel">
+    <input type="text" placeholder="Buscar..." (input)="filterProducts($event)"/>
+    <button (click)="addProduct()">Agregar</button>
+  </div>
   <table>
     <tr>
       <th>Nombre del producto</th>
@@ -20,4 +22,12 @@
       </td>
     </tr>
   </table>
+
+  <div class="footer-panel">
+    <span>Total de registros: {{ totalBankingProducts }}</span>
+    <select [(ngModel)]="selectedBankingProduct">
+      <option *ngFor="let bankingProduct of bankingProductsPerPage" [value]="bankingProduct">{{ bankingProduct }}</option>
+    </select>
+
+  </div>
 </div>

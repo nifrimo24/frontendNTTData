@@ -1,42 +1,47 @@
+/* Estilos para el panel de productos */
 .product-panel
   width: 100%
   padding: 20px
   box-sizing: border-box
+  font-family: Arial, sans-serif
 
-  input[type="text"]
-    width: 80%
-    padding: 10px
-    box-sizing: border-box
 
-  button
-    width: 15%
-    padding: 10px
-    margin-left: 5%
-    background-color: #F7DC6F
-    color: white
-    border: none
-    cursor: pointer
+/* Estilos para la tabla */
+.product-panel table
+  width: 100%
+  border-collapse: collapse
 
-    &:hover
-      background-color: #D4AC0D
 
-  table
-    width: 100%
-    border-collapse: collapse
+/* Estilos para las celdas de la tabla */
+.product-panel table th,
+.product-panel table td
+  border: 1px solid #ddd
+  padding: 8px
+  text-align: left
 
-    th, td
-      text-align: left
-      padding: 8px
 
-    tr:nth-child(even)
-      background-color: #f2f2f2
+/* Estilos para las celdas de encabezado de la tabla */
+.product-panel table th
+  background-color: #f2f2f2
+  color: black
 
-    button
-      background-color: #F7DC6F
-      color: white
-      border: none
-      cursor: pointer
-      transition: 0.3s
 
-      &:hover
-        background-color: #D4AC0D
+/* Estilos para el pie de página */
+.footer-panel
+  display: flex
+  justify-content: space-between
+  align-items: center
+  margin-top: 20px
+
+
+/* Estilos para el desplegable */
+.footer-panel select
+  padding: 5px
+
+/* Estilos para el pie de página */
+.header-panel
+  display: flex
+  justify-content: space-between
+  align-items: center
+  margin-top: 20px
+
