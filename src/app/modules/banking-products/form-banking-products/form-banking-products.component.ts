@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {BankingProduct} from "../../../models/BankingProduct";
+import {BankigProductsService} from "../../../services/bankig-products.service";
 @Component({
   selector: 'app-form-banking-products',
   templateUrl: './form-banking-products.component.html',
@@ -17,12 +18,12 @@ export class FormBankingProductsComponent implements OnInit {
     fechaRevision: ['', [Validators.required]]
   });
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private bpService: BankigProductsService) { }
 
   ngOnInit(): void {
   }
 
-  buildBankingProducts(): void {
+  async saveBankingProducts(): Promise<void> {
 
     const bankingProduct: BankingProduct = {
       id: this.bankingProductForm.get("id")?.value ?? '',
@@ -34,6 +35,10 @@ export class FormBankingProductsComponent implements OnInit {
     };
 
     console.log('Banking Products', bankingProduct);
+
+    const bankingProductCreated = await this.bpService.CreateBankingProduct(bankingProduct)
+
+    console.log("bankingProductCreated", bankingProductCreated)
   }
 
 }

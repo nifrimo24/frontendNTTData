@@ -1,6 +1,7 @@
 import {BankingProduct} from "../models/BankingProduct";
 
-export class BankingProductsResponse {
-    data: BankingProduct[] = [];
+export interface BankingProductsResponse {
+  message?: string
+  data: BankingProduct[]
 }
 

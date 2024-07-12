@@ -26,4 +26,11 @@ export class BankigProductsService {
     const urlGetAllBankingProducts = `${this.urlBankingProductsAPI}bp/products`;
     return (await this.getResponse(this.http.get<BankingProductsResponse>(urlGetAllBankingProducts)))[0].data;
   }
+
+  async CreateBankingProduct(newBankingProduct: BankingProduct) : Promise<BankingProduct> {
+    const urlCreateBankingProduct = `${this.urlBankingProductsAPI}bp/products`;
+    return (await this.getResponse(this.http.post<BankingProductsResponse>(urlCreateBankingProduct, newBankingProduct)))[0].data;
+  }
+
+
 }
