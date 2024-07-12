@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {BankingProduct} from "../../../models/BankingProduct";
+import {BankigProductsService} from "../../../services/bankig-products.service";
+import {DeleteBankingProductsComponent} from "../delete-banking-products/delete-banking-products.component";
 
 @Component({
   selector: 'app-list-banking-products',
@@ -8,41 +10,23 @@ import {BankingProduct} from "../../../models/BankingProduct";
 })
 export class ListBankingProductsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private bpService: BankigProductsService) {
+    this.getAllBankingProducts();
+  }
 
   ngOnInit(): void {
   }
 
-  bankingProducts: BankingProduct[] = [
-    {
-      name: 'Producto 1',
-      description: 'Descripción del Producto 1',
-      releaseDate: '01/01/2000',
-      restructuringDate: '01/01/2001'
-    },
-    {
-      name: 'Producto 2',
-      description: 'Descripción del Producto 2',
-      releaseDate: '01/01/2002',
-      restructuringDate: '01/01/2003'
-    },
-    {
-      name: 'Producto 3',
-      description: 'Descripción del Producto 3',
-      releaseDate: '01/01/2004',
-      restructuringDate: '01/01/2005'
-    },
-    {
-      name: 'Producto 4',
-      description: 'Descripción del Producto 4',
-      releaseDate: '01/01/2006',
-      restructuringDate: '01/01/2007'
-    }
-  ];
-
-  // Creamos una función para cambiar de página
+  bankingProducts: BankingProduct[] = [];
   currentPage = 1;
   pages = [1, 2, 3, 4, 5];
+
+
+  async getAllBankingProducts() {
+    this.bankingProducts = await this.bpService.GetAllBankingProducts();
+   console.log('allBankingProducts', this.bankingProducts)
+
+  }
 
   goToPage(page: number) {
     this.currentPage = page;

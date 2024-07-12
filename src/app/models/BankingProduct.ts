@@ -1,7 +1,9 @@
 export interface BankingProduct {
+  id: string;
   name: string;
   description: string;
-  releaseDate: string;
-  restructuringDate: string;
+  logo: string;
+  date_release: string;
+  date_revision: string;
 }
 

@@ -12,8 +12,8 @@
     <tr *ngFor="let bankingProduct of bankingProducts">
       <td>{{ bankingProduct.name }}</td>
       <td>{{ bankingProduct.description }}</td>
-      <td>{{ bankingProduct.releaseDate }}</td>
-      <td>{{ bankingProduct.restructuringDate }}</td>
+      <td>{{ bankingProduct.date_release }}</td>
+      <td>{{ bankingProduct.date_revision }}</td>
       <td>
         <button (click)="editProduct(bankingProduct)">Editar</button>
         <button (click)="deleteProduct(bankingProduct)">Eliminar</button>
