@@ -1,5 +1,5 @@
 <div class="product-panel">
-  <input type="text" placeholder="Buscar..." />
+  <input type="text" placeholder="Buscar..." (input)="filterProducts($event)"/>
   <button (click)="addProduct()">Agregar</button>
   <table>
     <tr>
@@ -9,7 +9,7 @@
       <th>Fecha de reestructuración</th>
       <th>Acciones</th>
     </tr>
-    <tr *ngFor="let bankingProduct of bankingProducts">
+    <tr *ngFor="let bankingProduct of filteredBankingProducts">
       <td>{{ bankingProduct.name }}</td>
       <td>{{ bankingProduct.description }}</td>
       <td>{{ bankingProduct.date_release }}</td>

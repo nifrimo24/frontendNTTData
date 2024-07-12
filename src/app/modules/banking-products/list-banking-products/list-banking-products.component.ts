@@ -18,30 +18,22 @@ export class ListBankingProductsComponent implements OnInit {
   }
 
   bankingProducts: BankingProduct[] = [];
-  currentPage = 1;
-  pages = [1, 2, 3, 4, 5];
+  filteredBankingProducts: BankingProduct[] = [];
 
-
-  async getAllBankingProducts() {
+  async getAllBankingProducts() : Promise<void> {
     this.bankingProducts = await this.bpService.GetAllBankingProducts();
-   console.log('allBankingProducts', this.bankingProducts)
-
+    this.filteredBankingProducts = [...this.bankingProducts];
   }
 
-  goToPage(page: number) {
-    this.currentPage = page;
+  filterProducts(event: any) {
+    const searchTerm = event.target.value.toLowerCase();
+    this.filteredBankingProducts = this.bankingProducts.filter(product => product.name.toLowerCase().includes(searchTerm));
   }
 
-  addProduct() {
-    // Implementa la lógica para agregar un producto
-  }
+  addProduct() { }
 
-  editProduct(product: BankingProduct) {
-    // Implementa la lógica para editar un producto
-  }
+  editProduct(product: BankingProduct) { }
 
-  deleteProduct(product: BankingProduct) {
-    // Implementa la lógica para eliminar un producto
-  }
+  deleteProduct(product: BankingProduct) { }
 
 }
