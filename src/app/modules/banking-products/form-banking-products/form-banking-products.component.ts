@@ -34,11 +34,15 @@ export class FormBankingProductsComponent implements OnInit {
       date_revision: this.bankingProductForm.get("fechaRevision")?.value ?? ''
     };
 
-    console.log('Banking Products', bankingProduct);
+    const bankingProductCreated = await this.bpService.CreateBankingProduct(bankingProduct);
+    console.log("bankingProductCreated", bankingProductCreated);
 
-    const bankingProductCreated = await this.bpService.CreateBankingProduct(bankingProduct)
-
-    console.log("bankingProductCreated", bankingProductCreated)
+    this.clearInputs();
   }
+
+  clearInputs(): void {
+    this.bankingProductForm.reset();
+  }
+
 
 }
