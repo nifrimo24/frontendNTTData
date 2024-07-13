@@ -15,6 +15,7 @@ export class FormBankingProductsComponent implements OnInit {
 
   bankingProduct: BankingProduct | null = null;
   isUpdatePage: boolean = false;
+  verifyBankingProduct: boolean = false;
   today: string = formatDate(new Date(), 'yyyy-MM-dd', 'en-US');
 
   bankingProductForm = this.formBuilder.group({
@@ -93,4 +94,20 @@ export class FormBankingProductsComponent implements OnInit {
 
     this.isUpdatePage = true;
   }
+
+  async veifyBankigProduct() {
+    const id = this.bankingProductForm.get('id')?.value;
+    if (id) {
+      console.log('this.id', id)
+      const exists = await this.bpService.verifyBankingProduct(id);
+      console.log('this.exists', exists)
+      if (exists) {
+        this.verifyBankingProduct = true;
+      }else{
+        this.verifyBankingProduct = false;
+      }
+    }
+    console.log('this.verifyBankingProduct', this.verifyBankingProduct)
+  }
+
 }

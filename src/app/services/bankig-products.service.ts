@@ -45,6 +45,11 @@ export class BankigProductsService {
     return (await this.getResponse(this.http.put<BankingProductsResponse>(urlUpdateBankingProduct, bankingProduct)))[0].data;
   }
 
+  async verifyBankingProduct(bankingProductId: string) : Promise<boolean> {
+    const urlVerifyBankingProduct = `${this.urlBankingProductsAPI}bp/products/verification/${bankingProductId}`;
+    return (await this.getResponse(this.http.get<boolean>(urlVerifyBankingProduct)))[0];
+  }
+
   setBankingProductToUpdate(bankingProductToUpdate: BankingProduct) {
     this.bankingProductSource.next(bankingProductToUpdate);
   }

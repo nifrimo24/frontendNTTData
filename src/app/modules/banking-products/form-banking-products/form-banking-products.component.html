@@ -6,7 +6,7 @@
     <div class="form-row">
       <div class="form-column">
         <label for="id">ID</label>
-        <input formControlName="id" type="text" id="id" placeholder="ID nuevo wiki!">
+        <input formControlName="id" type="text" id="id" placeholder="ID nuevo" (blur)="veifyBankigProduct()">
         <div *ngIf="bankingProductForm.controls.id.errors && bankingProductForm.controls.id.errors['required']" class="error-message">
           ID es requerido.
         </div>
@@ -15,6 +15,9 @@
         </div>
         <div *ngIf="bankingProductForm.controls.id.errors && bankingProductForm.controls.id.errors['maxlength']" class="error-message">
           ID no debe tener más de 10 caracteres.
+        </div>
+        <div *ngIf="verifyBankingProduct" class="error-message">
+          ID ya existe.
         </div>
 
         <label for="descripcion">Descripción</label>
