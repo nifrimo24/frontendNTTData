@@ -4,20 +4,23 @@ import {BankingProduct} from "../../../models/BankingProduct";
 import {BankigProductsService} from "../../../services/bankig-products.service";
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { formatDate } from '@angular/common';
 @Component({
   selector: 'app-form-banking-products',
   templateUrl: './form-banking-products.component.html',
   styleUrls: ['./form-banking-products.component.sass']
 })
 export class FormBankingProductsComponent implements OnInit {
-  bankingProduct: BankingProduct | null = null;
-  isUpdatePage: boolean = false;
   private bpSubscription!: Subscription;
 
+  bankingProduct: BankingProduct | null = null;
+  isUpdatePage: boolean = false;
+  today: string = formatDate(new Date(), 'yyyy-MM-dd', 'en-US');
+
   bankingProductForm = this.formBuilder.group({
-    id: ['', [Validators.required]],
-    nombre: ['', [Validators.required]],
-    descripcion: ['', [Validators.required]],
+    id: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
+    nombre: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
+    descripcion: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]],
     logo: ['', [Validators.required]],
     fechaLiberacion: ['', [Validators.required]],
     fechaRevision: ['', [Validators.required]]
@@ -26,10 +29,20 @@ export class FormBankingProductsComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private bpService: BankigProductsService,
               private router: Router
-  ) { }
+  ) {
+    this.bankingProductForm.controls.fechaLiberacion.valueChanges.subscribe(value => {
+      if (value) {
+        const date = new Date(value);
+        date.setFullYear(date.getFullYear() + 1);
+        this.bankingProductForm.controls.fechaRevision.setValue(date.toISOString().split('T')[0]);
+      }
+    });
+
+  }
 
   ngOnInit(): void {
     this.bankingProductForm.get('id')?.enable();
+    this.bankingProductForm.get('fechaRevision')?.disable();
 
     this.bpSubscription = this.bpService.currentBankingProduct.subscribe(
       bankingProduct => this.bankingProduct = bankingProduct
