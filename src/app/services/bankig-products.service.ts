@@ -25,31 +25,31 @@ export class BankigProductsService {
     }
   }
 
-  async GetAllBankingProducts() : Promise<BankingProduct[]> {
+  async getAllBankingProducts() : Promise<BankingProduct[]> {
     const urlGetAllBankingProducts = `${this.urlBankingProductsAPI}bp/products`;
     return (await this.getResponse(this.http.get<BankingProductsResponse>(urlGetAllBankingProducts)))[0].data;
   }
 
-  async CreateBankingProduct(newBankingProduct: BankingProduct) : Promise<BankingProduct> {
+  async createBankingProduct(newBankingProduct: BankingProduct) : Promise<BankingProduct> {
     const urlCreateBankingProduct = `${this.urlBankingProductsAPI}bp/products`;
     return (await this.getResponse(this.http.post<BankingProductsResponse>(urlCreateBankingProduct, newBankingProduct)))[0].data;
   }
 
-  async DeleteBankingProduct(bankingProductId: string) : Promise<string> {
+  async deleteBankingProduct(bankingProductId: string) : Promise<string> {
     const urlDeleteBankingProduct = `${this.urlBankingProductsAPI}bp/products/${bankingProductId}`;
     return (await this.getResponse(this.http.delete<BankingProductsResponse>(urlDeleteBankingProduct)))[0].message;
   }
 
-  async UpdateBankingProduct(bankingProduct: BankingProduct) : Promise<BankingProduct> {
+  async updateBankingProduct(bankingProduct: BankingProduct) : Promise<BankingProduct> {
     const urlUpdateBankingProduct = `${this.urlBankingProductsAPI}bp/products/${bankingProduct.id}`;
     return (await this.getResponse(this.http.put<BankingProductsResponse>(urlUpdateBankingProduct, bankingProduct)))[0].data;
   }
 
-  SetBankingProductToUpdate(bankingProductToUpdate: BankingProduct) {
+  setBankingProductToUpdate(bankingProductToUpdate: BankingProduct) {
     this.bankingProductSource.next(bankingProductToUpdate);
   }
 
-  ResetBankingProductToUpdate() {
+  resetBankingProductToUpdate() {
     this.bankingProductSource.next(null);
   }
 

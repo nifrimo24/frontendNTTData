@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {BankingProduct} from "../../../models/BankingProduct";
-import {DeleteBankingProductsComponent} from "../delete-banking-products/delete-banking-products.component";
 import {BankigProductsService} from "../../../services/bankig-products.service";
 import {Router} from "@angular/router";
 
@@ -31,7 +30,7 @@ export class ListBankingProductsComponent implements OnInit {
   deletedBankingProductId: string = "";
 
   async getAllBankingProducts() : Promise<void> {
-    this.bankingProducts = await this.bpService.GetAllBankingProducts();
+    this.bankingProducts = await this.bpService.getAllBankingProducts();
     this.filteredBankingProducts = [...this.bankingProducts];
     this.totalBankingProducts = this.filteredBankingProducts.length;
 
@@ -71,7 +70,7 @@ export class ListBankingProductsComponent implements OnInit {
   }
 
   updateBankingProduct(bankingProduct: BankingProduct) {
-    this.bpService.SetBankingProductToUpdate(bankingProduct);
+    this.bpService.setBankingProductToUpdate(bankingProduct);
     this.router.navigate(['/bp/products/update']);
   }
 
@@ -81,7 +80,7 @@ export class ListBankingProductsComponent implements OnInit {
 
   async confirmDelete(): Promise<void> {
     if (this.selectedBankingProductToDelete)
-      this.deletedBankingProductId = await this.bpService.DeleteBankingProduct(this.selectedBankingProductToDelete.id);
+      this.deletedBankingProductId = await this.bpService.deleteBankingProduct(this.selectedBankingProductToDelete.id);
 
     this.getAllBankingProducts();
     console.log(`Deleted product: ${this.deletedBankingProductId}`);

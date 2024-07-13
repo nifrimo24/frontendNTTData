@@ -37,7 +37,6 @@ export class FormBankingProductsComponent implements OnInit {
         this.bankingProductForm.controls.fechaRevision.setValue(date.toISOString().split('T')[0]);
       }
     });
-
   }
 
   ngOnInit(): void {
@@ -54,7 +53,7 @@ export class FormBankingProductsComponent implements OnInit {
 
   ngOnDestroy() {
     this.bpSubscription.unsubscribe();
-    this.bpService.ResetBankingProductToUpdate();
+    this.bpService.resetBankingProductToUpdate();
   }
 
   async saveOrUpdateBankingProducts(): Promise<void> {
@@ -69,8 +68,8 @@ export class FormBankingProductsComponent implements OnInit {
     };
 
     const bankingProductResponse = this.isUpdatePage
-      ? await this.bpService.UpdateBankingProduct(bankingProduct)
-      : await this.bpService.CreateBankingProduct(bankingProduct);
+      ? await this.bpService.updateBankingProduct(bankingProduct)
+      : await this.bpService.createBankingProduct(bankingProduct);
 
     this.clearInputs();
     this.router.navigateByUrl('/bp/products/list');
@@ -94,6 +93,4 @@ export class FormBankingProductsComponent implements OnInit {
 
     this.isUpdatePage = true;
   }
-
-
 }
