@@ -80,6 +80,10 @@ export class FormBankingProductsComponent implements OnInit {
     this.bankingProductForm.reset();
   }
 
+  canSubmit(): boolean {
+    return this.bankingProductForm.valid && !this.verifyBankingProduct;
+  }
+
   setBankingProductToUpdate() {
     this.bankingProductForm.get('id')?.disable();
 

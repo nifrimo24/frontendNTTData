@@ -65,7 +65,7 @@
 
     <div class="button-row">
       <button type="reset" (click)="clearInputs()">Reiniciar</button>
-      <button type="submit" (click)="saveOrUpdateBankingProducts()">Enviar</button>
+      <button type="submit" (click)="saveOrUpdateBankingProducts()" [disabled]="!canSubmit()">Enviar</button>
     </div>
   </form>
 </div>
