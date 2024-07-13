@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {BankingProduct} from "../../../models/BankingProduct";
 import {DeleteBankingProductsComponent} from "../delete-banking-products/delete-banking-products.component";
 import {BankigProductsService} from "../../../services/bankig-products.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-list-banking-products',
@@ -10,7 +11,9 @@ import {BankigProductsService} from "../../../services/bankig-products.service";
 })
 export class ListBankingProductsComponent implements OnInit {
 
-  constructor(private bpService: BankigProductsService) {
+  constructor(private bpService: BankigProductsService,
+              private router: Router
+  ) {
     this.getAllBankingProducts();
   }
 
@@ -67,9 +70,12 @@ export class ListBankingProductsComponent implements OnInit {
       .slice(0, this.selectedBankingProduct);
   }
 
-  editProduct(product: BankingProduct) { }
+  updateBankingProduct(bankingProduct: BankingProduct) {
+    this.bpService.SetBankingProductToUpdate(bankingProduct);
+    this.router.navigate(['/bp/products/update']);
+  }
 
-  deleteProduct(bankingProduct: BankingProduct): void {
+  deleteBankingProduct(bankingProduct: BankingProduct): void {
     this.selectedBankingProductToDelete = bankingProduct;
   }
 
